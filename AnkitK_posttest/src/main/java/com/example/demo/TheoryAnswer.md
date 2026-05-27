@@ -2,14 +2,14 @@ Q1.
 Ans:  First "Constructor called" will get printed , then  "Init called".
 Code: @Component public class MyBean {    public MyBean() {        System.out.println("Constructor called");    }    @PostConstruct    public void init() {        System.out.println("Init called");    } }
 Reason: Annotations. 
-================================================================================================================================
+============================================================================================
 Q2. 
 Ans: 
 return new ResponseEntity<>(HttpStatus.OK); is the mistake because , user was not passed. 
 
 is the corrected version : return new ResponseEntity<>(u, HttpStatus.OK);  user is passed.
 
-==============================================================================================================================
+============================================================================================
 Q4. 
 Ans: 
 The missing annotation is @Transactional. 
@@ -17,7 +17,7 @@ The missing annotation is @Transactional.
 
 if this annotation is missing then , one save succeeds while the other fails, data becomes inconsistent (money deducted but not credited). Spring will not automatically roll back both operations.
 
-================================================================================================================================
+============================================================================================
 Q6.
 Ans:
 a. 
@@ -29,7 +29,7 @@ b. mistake : String token = header.substring(6);
  reason: "Bearer " contains 7 characters including the space.
 Using substring(6) keeps an extra space at the beginning of the token, making the JWT key wrong .
 
-===============================================================================================================================
+============================================================================================
 Q8. 
 Ans: 
 1. The N+1 query problem in JPA happens when fetching a list of parent entities triggers one query for the parents and then an extra query for each child entity, leading to many unnecessary queries. 
@@ -39,7 +39,7 @@ Ans:
 3. The most common cause is lazy loading of relationships, and you can fix it with a single line like:
 @Query("SELECT s FROM Student s JOIN FETCH s.courses")
 
-==============================================================================================================================
+============================================================================================
 Q9. 
 Ans: For SQL : Subquery method:
 SELECT MAX(salary) 
@@ -50,7 +50,7 @@ USing JPQL :
 @Query("SELECT MAX(e.salary) FROM Employee e WHERE e.salary < (SELECT MAX(e2.salary) FROM Employee e2)")
 Double findSecondHighestSalary();
 
-==============================================================================================================================
+============================================================================================
 
 Q10.
 Ans: 
@@ -68,7 +68,7 @@ long countByCity(String city);
 
 Spring Data JPA already help us by providing this simple kind of query. 
 
-==============================================================================================================================
+============================================================================================
 Q11. 
 Ans:
 This is an example of n+1 problem in spring Jpa or hibernate .
@@ -77,7 +77,7 @@ corrected :
  @Query("SELECT o FROM Order o JOIN FETCH o.items")
 List<Order> findAllWithItems();
 
-==============================================================================================================================
+============================================================================================
 Q13. 
 Ans: 
 1. A Circuit Breaker in microservices is a resilience pattern that prevents repeated calls to a failing service, protecting the system from cascading failures.
@@ -86,7 +86,7 @@ Ans:
 
 3. With a circuit breaker, calls are blocked once failures cross a threshold, and a fallback ensures graceful degradation.
 
-===============================================================================================================================
+============================================================================================
 Q14.
 Ans:
 
@@ -97,7 +97,7 @@ Advantage:
 centralized routing & load balancing -> Clients don’t need to know individual service urls.
 cross-cutting concerns -> Security, logging, and rate limiting can be applied consistently in one place.
 
-==============================================================================================================================
+============================================================================================
 Q15.
 Ans: 
 1. Service Discovery in microservices is the mechanism by which services automatically locate each other at runtime instead of relying on fixed IP addresses or hostnames. 
@@ -106,7 +106,7 @@ Ans:
 
 3. it is a self configuring when service up , we don't need to hardcode check everytime.
 
-===============================================================================================================================
+============================================================================================
 Q16. 
 Ans: 
 A. Benefits of splitting into microservices: 
@@ -130,7 +130,7 @@ C. Eureka + API Gateway working together:
 2. The API Gateway is the single entry point for the React frontend. It routes requests like /api/users/, /api/orders/, and /api/products/ to the correct service.
 
 3. The gateway uses service names (resolved dynamically via Eureka) instead of hardcoded IPs, so the React app only needs to call one URL (e.g., http://localhost:8080/api/...).
-==============================================================================================================================
+============================================================================================
 
 Q18.
 Ans: 
@@ -139,7 +139,7 @@ Difference between @Mock and @MockBean:
 
 2. @MockBean (Spring Boot Test): Creates a mock and also injects it into the Spring ApplicationContext, replacing the real bean. one can use it in integration-style tests with @SpringBootTest when you want Spring to wire everything but substitute one dependency with a mock.
 
-===============================================================================================================================
+============================================================================================
 Q22.
 Ans: 
 mistake: 
@@ -156,4 +156,4 @@ Adding an empty dependency array [] so the fetch runs only once when the compone
              .then(data => setUsers(data)); [] });  //array dependency fulfilled.
 											^
 
-================================================================================================================================
+============================================================================================
